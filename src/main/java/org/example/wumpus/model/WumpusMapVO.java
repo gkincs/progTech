@@ -1,53 +1,30 @@
 package org.example.wumpus.model;
 
 import java.util.Arrays;
+import java.util.List;
 
+//MAP objektum
 public class WumpusMapVO {
-    private final int numberOfRows;
-    private final int numberOfColumns;
-    private final int[][] map;
-    private final boolean[][] fixed;
+    private final char[][] map;
 
-    public WumpusMapVO(int numberOfRows, int numberOfColumns, int[][] map, boolean[][] fixed) {
-        this.numberOfRows = numberOfRows;
-        this.numberOfColumns = numberOfColumns;
+    public WumpusMapVO(char[][] map) {
         this.map = deepCopy(map);
-        this.fixed = deepCopy(fixed);
+    }
+    // konstruktor - tábla méretére
+    public WumpusMapVO(int size) {
+        this.map = new char[size][size];
     }
 
-    public int getNumberOfRows() {
-        return numberOfRows;
+    public char[][] getMap() {
+        return map;
     }
 
-    public int getNumberOfColumns() {
-        return numberOfColumns;
-    }
-
-    public int[][] getMap() {
-        return deepCopy(map);
-    }
-
-    public boolean[][] getFixed() {
-        return deepCopy(fixed);
-    }
-
-    private int[][] deepCopy(int[][] map) {
-        int[][] result = new int[map.length][];
+    private char[][] deepCopy(char[][] map) {
+        char[][] result = new char[map.length][];
 
         for (int i = 0; i < map.length; i++) {
-            result[i] = new int[map[i].length];
-            for (int j = 0; j < map[i].length; j++) {
-                result[i][j] = map[i][j];
-            }
-        }
-
-        return result;
-    }
-    private boolean[][] deepCopy(boolean[][] map) {
-        boolean[][] result = new boolean[map.length][];
-
-        for (int i = 0; i < map.length; i++) {
-            result[i] = new boolean[map[i].length];
+            String row = Arrays.toString(map[i]);
+            result[i] = new char[map[i].length];
             for (int j = 0; j < map[i].length; j++) {
                 result[i][j] = map[i][j];
             }
@@ -59,10 +36,7 @@ public class WumpusMapVO {
     @Override
     public String toString() {
         return "WumpusMapVO{" +
-                "numberOfRows=" + numberOfRows +
-                ", numberOfColumns=" + numberOfColumns +
-                ", map=" + Arrays.deepToString(map) +
-                ", fixed=" + Arrays.deepToString(fixed) +
+                "map=" + Arrays.deepToString(map) +
                 '}';
     }
 
@@ -73,18 +47,11 @@ public class WumpusMapVO {
 
         WumpusMapVO that = (WumpusMapVO) o;
 
-        if (numberOfRows != that.numberOfRows) return false;
-        if (numberOfColumns != that.numberOfColumns) return false;
-        if (!Arrays.deepEquals(map, that.map)) return false;
-        return Arrays.deepEquals(fixed, that.fixed);
+        return Arrays.deepEquals(map, that.map);
     }
 
     @Override
     public int hashCode() {
-        int result = numberOfRows;
-        result = 31 * result + numberOfColumns;
-        result = 31 * result + Arrays.deepHashCode(map);
-        result = 31 * result + Arrays.deepHashCode(fixed);
-        return result;
+        return Arrays.deepHashCode(map);
     }
 }
