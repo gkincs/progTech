@@ -6,46 +6,46 @@ import org.example.wumpus.service.map.exception.MapParseException;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * List string átalakítása char[][] tömbbé
+ * Map-re vonatkozó feltételek vizsgálata
+ */
 public class MapParser {
-    private static final String VALID_ROW_REGEX = "[0-9]+";
+    private static final String MAP_ROW_REGEX = "W[_WPHUG]*W";
+    private static  final  String PLAYER_ROW_REGEX = "(6|7|8|9|1[0-9]|20)\\s[^\\d]\\s(0|1?\\d|20)\\s[ESNW]";
 
     private int numberOfRows;
     private int numberOfColumns;
 
     public MapParser(int numberOfRows) {
         this.numberOfRows = numberOfRows;
-        //this.numberOfColumns = numberOfColumns;
     }
 
     public WumpusMapVO parseMap(List<String> rawMap) throws MapParseException {
-        /*checkNumberOfRows(rawMap);
-        checkNumberOfColumns(rawMap);
-        checkForInvalidValues(rawMap);*/
+        checkNumberOfRows(rawMap);
+        checkForInvalidValues(rawMap);
 
         char[][] map = getMap(rawMap);
-
         return new WumpusMapVO(map);
     }
 
     private void checkNumberOfRows(List<String> rows) throws MapParseException {
-        if (rows.size() != numberOfRows) {
+        if (rows.size() != numberOfRows +1) {
             throw new MapParseException("Number of rows must be " + numberOfRows);
         }
     }
 
-    private void checkNumberOfColumns(List<String> rows) throws MapParseException {
-        for (String row : rows) {
-            if (row.length() != numberOfColumns) {
-                throw new MapParseException("Number of columns must be " + numberOfColumns);
-            }
-        }
-    }
-
     private void checkForInvalidValues(List<String> rows) throws MapParseException {
+        Boolean firstRow = true;
         for (String row : rows) {
-            if (!Pattern.matches(VALID_ROW_REGEX, row)) {
+            if (!Pattern.matches(PLAYER_ROW_REGEX, row) && firstRow == true) {
                 throw new MapParseException("Row contains invalid characters");
             }
+
+            if (!Pattern.matches(MAP_ROW_REGEX, row) && firstRow == false) {
+                throw new MapParseException("Row contains invalid characters");
+            }
+            firstRow = false;
         }
     }
 
