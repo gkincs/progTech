@@ -39,7 +39,7 @@ public class MapParser {
         Boolean firstRow = true;
         for (String row : rows) {
             if (!Pattern.matches(PLAYER_ROW_REGEX, row) && firstRow == true) {
-                throw new MapParseException("Row contains invalid characters");
+                throw new MapParseException("First row contains invalid characters");
             }
 
             if (!Pattern.matches(MAP_ROW_REGEX, row) && firstRow == false) {

@@ -10,10 +10,6 @@ public class WumpusMapVO {
     public WumpusMapVO(char[][] map) {
         this.map = deepCopy(map);
     }
-    // konstruktor - tábla méretére
-    public WumpusMapVO(int size) {
-        this.map = new char[size][size];
-    }
 
     public char[][] getMap() {
         return map;
@@ -42,7 +38,7 @@ public class WumpusMapVO {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this == o) {return true;}
         if (o == null || getClass() != o.getClass()) return false;
 
         WumpusMapVO that = (WumpusMapVO) o;
