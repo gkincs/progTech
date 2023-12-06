@@ -19,10 +19,10 @@ import org.example.wumpus.service.map.parser.MapParser;
 public class Main {
     public static void main(String[] args) throws IOException, MapReadException, MapParseException, SQLException {
 
-        WumpusMapVO test = new WumpusMapVO(new char[][]{{'w','w','e'},{'w','w','e'},{'w','w','e'}});
+        WumpusMapVO test = new WumpusMapVO(new char[][]{{'w', 'w', 'e'}, {'w', 'w', 'e'}, {'w', 'w', 'e'}});
 
         DbPersister dbPersister = new DbPersister();
-        dbPersister.writeMap("Test",test);
+        dbPersister.writeMap("Test", test);
         WumpusMapVO read = dbPersister.readMap("Test");
         System.out.println(read);
 

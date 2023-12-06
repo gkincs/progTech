@@ -1,4 +1,4 @@
-/*package org.example.wumpus.service.map.parser;
+package org.example.wumpus.service.map.parser;
 
 import org.example.wumpus.model.WumpusMapVO;
 import org.example.wumpus.service.map.exception.MapParseException;
@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MapParserTest {
     private MapParser underTest;
-    private MapParser underTestMapValidate;
+    private MapParser parser6;
     @BeforeEach
     void setUp() {
 
-        underTest = new MapParser(7);
-        underTestMapValidate = new MapParser(6);
+        underTest = new MapParser(3);
+        parser6 = new MapParser(6);
     }
 
     @Test
@@ -44,7 +44,7 @@ class MapParserTest {
     void testCheckNumberOfRowsShouldThrowMapParseExceptionWhenNumberOfRowsIsInvalid() {
         // Given
         final List<String> invalidNumberOfRows = List.of(
-                "2 B 5",
+                "3 B 5",
                 "WWW",
                 "WWW",
                 "WWW"
@@ -55,72 +55,27 @@ class MapParserTest {
             underTest.parseMap(invalidNumberOfRows);
         });
 
-        assertEquals("Number of rows must be 2", exception.getMessage());
-    }
-
-    @Test
-    void testCheckForInvalidValuesShouldThrowMapParseExceptionWhenFirstRowContainsInvalidCharacters() {
-        // Given
-        final List<String> firstRowInvalidValue = List.of(
-                "2 B 5 2",
-                "WWW",
-                "WWW"
-        );
-
-        // When, Then
-        MapParseException exception = assertThrows(MapParseException.class, () -> {
-            underTest.parseMap(firstRowInvalidValue);
-        });
-
         assertEquals("First row contains invalid characters", exception.getMessage());
     }
 
     @Test
-    void testCheckForInvalidValuesShouldThrowMapParseExceptionWhenNonFirstRowContainsInvalidCharacters() {
+    void testCheckForInvalidValuesShouldThrowMapParseExceptionWhenOtherRowContainsInvalidCharacters() {
         // Given
-        final List<String> otherRowsInvalidValue = List.of(
-                "2 B 5",
-                "WJW",
-                "WWW"
+        final List<String> otherRowInvalidValue = List.of(
+                "6 B 5 E",
+                "WWJWW",
+                "W___PW",
+                "WUGP_W",
+                "W____W",
+                "W__P_W",
+                "WWWWWW"
         );
 
         // When, Then
         MapParseException exception = assertThrows(MapParseException.class, () -> {
-            underTest.parseMap(otherRowsInvalidValue);
+            parser6.parseMap(otherRowInvalidValue);
         });
 
         assertEquals("Row contains invalid characters", exception.getMessage());
     }
-
-    @Test
-    public void testMapParseShouldReturnValidMap() throws MapValidationException,MapParseException {
-        //Given
-        final List<String> firstRowOfTheMap = List.of(
-                "S B 5",
-                "WWWW",
-                "W_PW",
-                "WG_W",
-                "WUPW",
-                "WP_W",
-                "WWWW"
-        );
-        final String[][] expectedMap = {
-                {"S"," ","B"," ","5"},
-                {"W","W","W","W"},
-                {"W","_","P","W"},
-                {"W","G","_","W"},
-                {"W","U","P","W"},
-                {"W","P","_","W"},
-                {"W","W","W","W"}
-        };
-        //When
-        WumpusMapVO result = underTestMapValidate.parseMap(firstRowOfTheMap);
-
-        //Then
-        assertTrue(Arrays.deepEquals(result.getMap(),expectedMap));
-
-    }
-
 }
-
- */
