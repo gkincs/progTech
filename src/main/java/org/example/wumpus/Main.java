@@ -23,6 +23,8 @@ public class Main {
 
         DbPersister dbPersister = new DbPersister();
         dbPersister.writeMap("Test",test);
+        WumpusMapVO read = dbPersister.readMap("Test");
+        System.out.println(read);
 
         InputStream inputStream = Main.class.getClassLoader().getResource("map/beginner.txt").openStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
