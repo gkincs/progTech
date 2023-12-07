@@ -26,7 +26,7 @@ public class Main {
         WumpusMapVO read = dbPersister.readMap("Test");
         System.out.println(read);
 
-        InputStream inputStream = Main.class.getClassLoader().getResource("map/beginner.txt").openStream();
+        InputStream inputStream = Main.class.getClassLoader().getResource("map/wumpusinput.txt").openStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         MapReader mapReader = new BufferedReaderMapReader(bufferedReader);
         List<String> stringList = mapReader.readMap();

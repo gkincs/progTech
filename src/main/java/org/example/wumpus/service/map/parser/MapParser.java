@@ -1,10 +1,11 @@
 package org.example.wumpus.service.map.parser;
 
+import java.util.List;
+import java.util.regex.Pattern;
+
 import org.example.wumpus.model.WumpusMapVO;
 import org.example.wumpus.service.map.exception.MapParseException;
 
-import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * List string átalakítása char[][] tömbbé
@@ -30,7 +31,7 @@ public class MapParser {
     }
 
     private void checkNumberOfRows(List<String> rows) throws MapParseException {
-        if (rows.size() != numberOfRows +1) {
+        if (rows.size() != numberOfRows + 1) {
             throw new MapParseException("Number of rows must be " + numberOfRows);
         }
     }
@@ -53,14 +54,14 @@ public class MapParser {
         char[][] result = new char[numberOfRows][];
 
         for (int i = 1; i <= numberOfRows; i++) {
-            result[i-1] = new char[numberOfRows];
+            result[i - 1] = new char[numberOfRows];
 
             String line = rawMap.get(i);
             String[] parts = line.split("");
 
             for (int j = 0; j < numberOfRows; j++) {
                char parsed = parts[j].charAt(0);
-                result[i-1][j] = parsed;
+                result[i - 1][j] = parsed;
             }
         }
 
