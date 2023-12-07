@@ -11,7 +11,9 @@ public class MapStructValidator implements MapValidator {
     /**
      * @param mapVO
      */
+
     @Override
+
     public void validate(WumpusMapVO mapVO) throws MapValidationException {
     wumpusCheck(mapVO);
     goldCheck(mapVO);
