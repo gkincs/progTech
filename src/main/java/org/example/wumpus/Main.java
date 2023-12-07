@@ -29,6 +29,8 @@ public class Main {
 
         JsonPersister jsonPersister = new JsonPersister();
         jsonPersister.writeMap("jsonTest", test);
+        WumpusMapVO readJson = jsonPersister.readMap("jsonTest");
+        System.out.println(readJson);
 
         InputStream inputStream = Main.class.getClassLoader().getResource("map/wumpusinput.txt").openStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));

@@ -1,7 +1,9 @@
 package org.example.wumpus.model;
 
 import java.util.Arrays;
-import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * A játék térképét reprezentáló osztály.
@@ -15,7 +17,9 @@ import java.util.List;
 public class WumpusMapVO {
     private final char[][] map;
 
-    public WumpusMapVO(char[][] map) {
+    @JsonCreator
+
+    public WumpusMapVO(@JsonProperty("map") char[][] map) {
         this.map = deepCopy(map);
     }
 

@@ -115,6 +115,7 @@
                         <exclude>org/example/wumpus/Main.*</exclude>
                         <exclude>org/example/wumpus/model/*</exclude>
                         <exclude>org/example/wumpus/persist/db/*</exclude>
+                        <exclude>org/example/wumpus/persist/json/*</exclude>
                         <exclude>org/example/wumpus/service/map/exception/*</exclude>
                     </excludes>
                 </configuration>
