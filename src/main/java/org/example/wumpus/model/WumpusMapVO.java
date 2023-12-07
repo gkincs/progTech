@@ -24,7 +24,7 @@ public class WumpusMapVO {
     }
 
     public char[][] getMap() {
-        return map;
+        return deepCopy(map);
     }
 
     private char[][] deepCopy(char[][] map) {

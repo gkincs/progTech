@@ -8,12 +8,13 @@ import org.slf4j.Logger;
 public class MapStructValidator implements MapValidator {
 
     private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(MapStructValidator.class);
-    /**
-     * @param mapVO
-     */
+    WumpusMapVO mapVO;
+
+    public MapStructValidator(WumpusMapVO mapVO) {
+        this.mapVO = mapVO;
+    }
 
     @Override
-
     public void validate(WumpusMapVO mapVO) throws MapValidationException {
     wumpusCheck(mapVO);
     goldCheck(mapVO);
@@ -44,7 +45,9 @@ public class MapStructValidator implements MapValidator {
             LOGGER.error("Map size is less than 21. Allowed: 3 Wumpus.");
             throw new MapValidationException("Map size is less than 21. Allowed: 3 Wumpus.");
         }
+
     }
+
     private void goldCheck(WumpusMapVO mapVO) throws MapValidationException {
         int counter = 0;
         char[][] map = mapVO.getMap();
@@ -56,12 +59,14 @@ public class MapStructValidator implements MapValidator {
                 }
             }
         }
-        if (counter !=1) {
+        if (counter != 1) {
             LOGGER.error("Allowed: 1 Gold.");
             throw new MapValidationException("Allowed: 1 Gold.");
+
         }
 
     }
+
     private void firstAndLastRowCheck(WumpusMapVO mapVO) throws MapValidationException {
         char[][] map = mapVO.getMap();
 
