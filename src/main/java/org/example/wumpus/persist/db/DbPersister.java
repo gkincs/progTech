@@ -18,6 +18,16 @@ public class DbPersister {
     private static final Logger LOGGER = LoggerFactory.getLogger(DbPersister.class);
     private final Connection connection;
 
+    /**
+     * Az adatbázis-kezelő objektum létrehozása - Perzisztencia réteg.
+     *
+     * Ez a konstruktor inicializálja az adatbázis-kezelő objektumot.
+     * H2 memóriában futó adatbázist használ, és inicializálja a kiindulási sémát a 'create.sql' fájlból.
+     *
+     * @throws RuntimeException Inicializálási hiba esetén,
+     *         pl. JDBC kapcsolat hiba esetén.
+     */
+
     public DbPersister() {
         try {
             Class.forName("org.h2.Driver");
@@ -33,6 +43,17 @@ public class DbPersister {
         }
     }
 
+    /**
+     * A térkép mentése H2 adatbázisba.
+     *
+     * Egy megadott nevű térképet ment el az adatbázisba. A térkép a WumpusMapVO objektumból
+     * származik, és a GRID_LINES táblába kerül beszúrásra (soronként).
+     * Minden sorban a grid neve, a sor tartalma (stringként) és a sor sorszáma szerepel.
+     *
+     * @param name A térkép neve.
+     * @param map A mentésre kiválasztott térkép (WumpusMapVO objektumként).
+     * @throws SQLException Adatbázis hiba esetén kivétel.
+     */
     public void writeMap(String name, WumpusMapVO map) throws SQLException {
         try (PreparedStatement statement = connection.prepareStatement(
                 "INSERT INTO GRID_LINES (grid_name, line, row_nr) VALUES(?, ?, ?)")) {
@@ -47,9 +68,21 @@ public class DbPersister {
                     recordCount += statement.executeUpdate();
                 }
         } catch (Exception e) {
-            LOGGER.error("Nem tudtam menteni" + e.getMessage());
+            LOGGER.error(e.getMessage());
             }
     }
+
+    /**
+     * Térkép beolvasása az adatbázisból név alapján.
+     *
+     * Egy adott névvel azonosított térképet olvas be az adatbázisból. Lekérdezést használ
+     * a GRID_LINES táblából a megadott név alapján. A lekért sorokból
+     * egy char[][] térképet állít össze, ami a WumpusMapVO objektumban tér vissza.
+     *
+     * @param name A térkép neve, az adatbázis lekéréshez.
+     * @return A beolvasott térképből származó WumpusMapVO objektum.
+     * Ha valamilyen hiba történik az olvasás közben, üres térképpel tér vissza.
+     */
 
     public WumpusMapVO readMap(String name) {
         try {

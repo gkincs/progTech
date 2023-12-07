@@ -3,7 +3,15 @@ package org.example.wumpus.model;
 import java.util.Arrays;
 import java.util.List;
 
-//MAP objektum
+/**
+ * A játék térképét reprezentáló osztály.
+ *
+ * Ez az osztály char[][] alapján tartalmazza a térképét.
+ * A térkép mérete rögzített, és a konstruktor által megadott char tömbből másolódik.
+ *
+ * @param map A játék térképét reprezentáló char tömb. A konstruktor deepcopy-t készít róla.
+ **/
+
 public class WumpusMapVO {
     private final char[][] map;
 

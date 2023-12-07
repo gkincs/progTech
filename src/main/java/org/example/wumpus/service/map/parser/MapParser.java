@@ -6,10 +6,11 @@ import java.util.regex.Pattern;
 import org.example.wumpus.model.WumpusMapVO;
 import org.example.wumpus.service.map.exception.MapParseException;
 
-
 /**
- * List string átalakítása char[][] tömbbé
- * Map-re vonatkozó feltételek vizsgálata
+ * A térkép fájl szöveges formátumának konvertálására.
+ *
+ * A  MapParser elemzi a térképadatokat (rawMap) és létrehozza a  WumpusMapVO objektumot.
+ * A megfelelő formátum vzsgálata (térkép sorainak száma, a sorok értékeinek érvényessége).
  */
 public class MapParser {
     private static final String MAP_ROW_REGEX = "W[_WPHUG]*W";

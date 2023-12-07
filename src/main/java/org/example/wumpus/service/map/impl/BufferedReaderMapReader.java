@@ -8,6 +8,12 @@ import java.util.List;
 import org.example.wumpus.service.map.MapReader;
 import org.example.wumpus.service.map.exception.MapReadException;
 
+/**
+ * A térképet tartalmazó fájlt beolvasó osztály
+ * BufferedReader objektummal inicializálható.
+ * A BufferedReaderMapReader, a MapReader interfészt implementálja a térkép beolvasásához.
+ */
+
 public class BufferedReaderMapReader implements MapReader {
 
     private final BufferedReader bufferedReader;
