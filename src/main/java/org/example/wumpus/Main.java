@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.example.wumpus.model.WumpusMapVO;
 import org.example.wumpus.persist.db.DbPersister;
+import org.example.wumpus.persist.json.JsonPersister;
 import org.example.wumpus.service.map.MapReader;
 import org.example.wumpus.service.map.exception.MapParseException;
 import org.example.wumpus.service.map.exception.MapReadException;
@@ -25,6 +26,9 @@ public class Main {
         dbPersister.writeMap("Test", test);
         WumpusMapVO read = dbPersister.readMap("Test");
         System.out.println(read);
+
+        JsonPersister jsonPersister = new JsonPersister();
+        jsonPersister.writeMap("jsonTest", test);
 
         InputStream inputStream = Main.class.getClassLoader().getResource("map/wumpusinput.txt").openStream();
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
