@@ -1,13 +1,23 @@
 package org.example.wumpus.persist.json;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.wumpus.model.WumpusMapVO;
 import org.slf4j.Logger;
-import java.io.*;
 
+
+/**
+ * A játék térképének JSON fájlba való mentése.
+ *
+ */
 public class JsonPersister {
-    private final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(JsonPersister.class);
+    private static final Logger LOGGER = org.slf4j.LoggerFactory.getLogger(JsonPersister.class);
 
     public void writeMap(String name, WumpusMapVO map) {
         ObjectMapper mapper = new ObjectMapper();
@@ -23,6 +33,12 @@ public class JsonPersister {
         }
     }
 
+    /**
+     * JSON fájlból történő visszaolvasás.
+     *
+     * @param name A beolvasandó térkép neve.
+     * @return A beolvasott térképet tartalmazó WumpusMapVo objektum.
+     */
     public WumpusMapVO readMap(String name) {
         FileReader fileReader = null;
         try {
