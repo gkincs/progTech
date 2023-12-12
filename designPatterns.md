@@ -1,4 +1,4 @@
-﻿Tervezési minták egy OO programozási nyelvben  -  MVC, mint modell-nézet-vezérlő minta és néhány másik tervezési minta
+**﻿Tervezési minták egy OO programozási nyelvben  -  MVC, mint modell-nézet-vezérlő minta és néhány másik tervezési minta**
 
 - A tervezési minták megoldásokat kínálnak gyakran előforduló problémákra a szoftvertervezés területén. 
   Olyanok, mint az előre elkészített vázlatok, amelyeket testre szabva alkalmazhatnak, hogy megoldást találjanak egy ismétlődő tervezési problémára.
